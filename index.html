@@ -14,6 +14,7 @@
             margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
+            touch-action: none;
         }
         #gameCanvas {
             border: 2px solid #333;
@@ -39,6 +40,42 @@
         button:hover {
             background-color: #45a049;
         }
+        #direction-controls {
+            position: fixed;
+            bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            grid-template-rows: repeat(3, 60px);
+            gap: 5px;
+        }
+        .direction-btn {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(76, 175, 80, 0.7);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .direction-btn:active {
+            background-color: rgba(69, 160, 73, 0.9);
+        }
+        #up-btn { grid-column: 2; grid-row: 1; }
+        #left-btn { grid-column: 1; grid-row: 2; }
+        #right-btn { grid-column: 3; grid-row: 2; }
+        #down-btn { grid-column: 2; grid-row: 3; }
+        @media (max-width: 600px) {
+            #gameCanvas {
+                width: 90vw;
+                height: 90vw;
+            }
+        }
     </style>
 </head>
 <body>
@@ -47,6 +84,12 @@
     <div id="controls">
         <button onclick="startGame()">开始游戏</button>
         <button onclick="pauseGame()">暂停</button>
+    </div>
+    <div id="direction-controls">
+        <button id="up-btn" class="direction-btn">↑</button>
+        <button id="left-btn" class="direction-btn">←</button>
+        <button id="right-btn" class="direction-btn">→</button>
+        <button id="down-btn" class="direction-btn">↓</button>
     </div>
     <script src="snake.js"></script>
 </body>

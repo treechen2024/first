@@ -132,6 +132,43 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+// 虚拟方向键控制
+const directionButtons = {
+    up: document.getElementById('up-btn'),
+    down: document.getElementById('down-btn'),
+    left: document.getElementById('left-btn'),
+    right: document.getElementById('right-btn')
+};
+
+function handleDirectionButton(dir) {
+    if (isPaused) return;
+    
+    switch(dir) {
+        case 'up':
+            if (direction !== 'down') direction = 'up';
+            break;
+        case 'down':
+            if (direction !== 'up') direction = 'down';
+            break;
+        case 'left':
+            if (direction !== 'right') direction = 'left';
+            break;
+        case 'right':
+            if (direction !== 'left') direction = 'right';
+            break;
+    }
+}
+
+Object.entries(directionButtons).forEach(([dir, btn]) => {
+    ['touchstart', 'mousedown'].forEach(eventType => {
+        btn.addEventListener(eventType, (e) => {
+            e.preventDefault();
+            handleDirectionButton(dir);
+        });
+    });
+});
+
+
 // 初始化游戏
 initGame();
 draw();
