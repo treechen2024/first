@@ -134,6 +134,8 @@ document.addEventListener('keydown', (event) => {
 
 // 虚拟方向键控制
 const directionButtons = {
+    up: document.getElementById('up-btn'),
+    down: document.getElementById('down-btn'),
     left: document.getElementById('left-btn'),
     right: document.getElementById('right-btn')
 };
@@ -142,6 +144,12 @@ function handleDirectionButton(dir) {
     if (isPaused) return;
     
     switch(dir) {
+        case 'up':
+            if (direction !== 'down') direction = 'up';
+            break;
+        case 'down':
+            if (direction !== 'up') direction = 'down';
+            break;
         case 'left':
             if (direction !== 'right') direction = 'left';
             break;

@@ -49,13 +49,13 @@
             gap: 20px;
         }
         .direction-btn {
-            width: 50px;
-            height: 50px;
+            width: 15px;
+            height: 15px;
             background-color: rgba(76, 175, 80, 0.7);
             border: none;
             border-radius: 50%;
             color: white;
-            font-size: 24px;
+            font-size: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -67,8 +67,10 @@
         .direction-btn:active {
             background-color: rgba(69, 160, 73, 0.9);
         }
-        #left-btn { order: 1; }
-        #right-btn { order: 2; }
+        #up-btn { order: 1; }
+        #left-btn { order: 2; }
+        #down-btn { order: 3; }
+        #right-btn { order: 4; }
         @media (max-width: 600px) {
             #gameCanvas {
                 width: 90vw;
@@ -80,13 +82,14 @@
 <body>
     <div id="score">分数: 0</div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="direction-controls">
+        <button id="up-btn" class="direction-btn">↑</button>
+        <button id="left-btn" class="direction-btn">←</button>
+        <button id="down-btn" class="direction-btn">↓</button>
+        <button id="right-btn" class="direction-btn">→</button>
+    </div>
     <div id="controls">
         <button onclick="startGame()">开始游戏</button>
-        <button onclick="pauseGame()">暂停</button>
-    </div>
-    <div id="direction-controls">
-        <button id="left-btn" class="direction-btn">←</button>
-        <button id="right-btn" class="direction-btn">→</button>
     </div>
     <script src="snake.js"></script>
 </body>
