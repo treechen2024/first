@@ -27,6 +27,17 @@
         #controls {
             margin-top: 20px;
         }
+        #game-controls {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .difficulty-controls {
+            display: flex;
+            gap: 10px;
+        }
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -82,15 +93,22 @@
 <body>
     <div id="score">分数: 0</div>
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="game-controls">
+        <button onclick="startGame()">开始游戏</button>
+        <button onclick="pauseGame()">暂停/继续</button>
+        <div class="difficulty-controls">
+            <button onclick="setGameSpeed(200)">简单</button>
+            <button onclick="setGameSpeed(150)">中等</button>
+            <button onclick="setGameSpeed(100)">困难</button>
+        </div>
+    </div>
     <div id="direction-controls">
         <button id="up-btn" class="direction-btn">↑</button>
         <button id="left-btn" class="direction-btn">←</button>
         <button id="down-btn" class="direction-btn">↓</button>
         <button id="right-btn" class="direction-btn">→</button>
     </div>
-    <div id="controls">
-        <button onclick="startGame()">开始游戏</button>
-    </div>
+
     <script src="snake.js"></script>
 </body>
 </html>

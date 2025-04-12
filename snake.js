@@ -4,6 +4,8 @@ let direction = 'right';
 let gameLoop;
 let score = 0;
 let isPaused = false;
+let gameSpeed = 150;
+let highScore = localStorage.getItem('highScore') || 0;
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -38,6 +40,24 @@ function draw() {
     // 清空画布
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // 绘制网格
+    ctx.strokeStyle = '#eee';
+    for(let i = 0; i < gridWidth; i++) {
+        for(let j = 0; j < gridHeight; j++) {
+            ctx.strokeRect(i * gridSize, j * gridSize, gridSize, gridSize);
+        }
+    }
+
+    // 如果游戏暂停，显示暂停提示
+    if (isPaused) {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#fff';
+        ctx.font = '30px Arial';
+        ctx.textAlign = 'center';
+        ctx.fillText('游戏暂停', canvas.width/2, canvas.height/2);
+    }
 
     // 绘制蛇
     ctx.fillStyle = '#4CAF50';
@@ -93,7 +113,11 @@ function checkCollision(position) {
 }
 
 function updateScore() {
-    document.getElementById('score').textContent = `分数: ${score}`;
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+    }
+    document.getElementById('score').textContent = `分数: ${score} | 最高分: ${highScore}`;
 }
 
 function gameOver() {
@@ -101,10 +125,18 @@ function gameOver() {
     alert(`游戏结束！最终得分：${score}`);
 }
 
+function setGameSpeed(speed) {
+    gameSpeed = speed;
+    if (gameLoop) {
+        clearInterval(gameLoop);
+        gameLoop = setInterval(moveSnake, gameSpeed);
+    }
+}
+
 function startGame() {
     clearInterval(gameLoop);
     initGame();
-    gameLoop = setInterval(moveSnake, 150);
+    gameLoop = setInterval(moveSnake, gameSpeed);
     isPaused = false;
 }
 
