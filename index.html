@@ -3,28 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贪吃蛇游戏</title>
+    <title>貪吃蛇遊戲</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
             touch-action: none;
             padding-top: 20px;
         }
-        #direction-controls {
+
+        #game-container {
             display: flex;
-            flex-wrap: nowrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            width: auto;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
         }
+
+        #canvas-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.95);
+            transform-origin: center center;
+            margin-bottom: 20px;
+        }
+
+        #gameCanvas {
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+
+        #score {
+            font-size: 24px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #direction-controls {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .direction-btn {
             width: 50px;
             height: 50px;
@@ -35,11 +67,15 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         #game-controls {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             margin-bottom: 20px;
+            justify-content: center;
         }
+
         .game-btn {
             padding: 10px 20px;
             font-size: 16px;
@@ -49,74 +85,19 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .difficulty-controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        #gameCanvas {
-            border: 2px solid #333;
-            background-color: #fff;
-        }
-        #score {
-            font-size: 24px;
-            margin: 20px 0;
-        }
-        #controls {
-            margin-top: 20px;
-        }
-        #game-controls {
-            margin: 20px 0;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 600px;
-            padding: 0 20px;
-        }
-        .difficulty-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            margin: 0 5px;
-        }
-        button:hover {
+
+        .game-btn:hover,
+        .direction-btn:hover {
             background-color: #45a049;
         }
-        #direction-controls {
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            width: auto;
-            justify-content: center;
-        }
-        .direction-btn {
-            width: 50px;
-            height: 50px;
-            font-size: 24px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+
         @media (min-width: 601px) {
             #gameCanvas {
                 width: 80vh;
                 height: 80vh;
             }
         }
+
         @media (max-width: 600px) {
             #gameCanvas {
                 width: 90vw;
@@ -127,22 +108,25 @@
 </head>
 <body>
     <div id="game-container">
+        <div id="canvas-container">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+        </div>
+
+        <div id="score">分數: 0　最高分: 0　時間: 0s</div>
+
         <div id="direction-controls">
             <button id="left-btn" class="direction-btn">←</button>
             <button id="up-btn" class="direction-btn">↑</button>
             <button id="down-btn" class="direction-btn">↓</button>
             <button id="right-btn" class="direction-btn">→</button>
         </div>
-        
-        <div id="game-controls">
-            <button onclick="pauseGame()" class="game-btn">暂停/继续</button>
-            <button onclick="setGameSpeed(200)" class="game-btn">简单</button>
-            <button onclick="setGameSpeed(150)" class="game-btn">中等</button>
-            <button onclick="setGameSpeed(100)" class="game-btn">困难</button>
-        </div>
 
-        <div id="score">分数: 0</div>
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div id="game-controls">
+            <button onclick="pauseGame()" class="game-btn">暫停 / 繼續</button>
+            <button onclick="setGameSpeed(200)" class="game-btn">簡單</button>
+            <button onclick="setGameSpeed(150)" class="game-btn">中等</button>
+            <button onclick="setGameSpeed(100)" class="game-btn">困難</button>
+        </div>
     </div>
 
     <script src="snake.js"></script>
