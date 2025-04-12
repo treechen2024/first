@@ -9,12 +9,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
             touch-action: none;
+            padding-top: 20px;
+        }
+        #direction-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 170px;
+            justify-content: center;
+        }
+        .direction-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #game-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .game-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .difficulty-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
         #gameCanvas {
             border: 2px solid #333;
@@ -30,12 +68,16 @@
         #game-controls {
             margin: 20px 0;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+            padding: 0 20px;
         }
         .difficulty-controls {
             display: flex;
+            flex-direction: column;
             gap: 10px;
         }
         button {
@@ -52,36 +94,23 @@
             background-color: #45a049;
         }
         #direction-controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 170px;
+            justify-content: center;
         }
         .direction-btn {
-            width: 15px;
-            height: 15px;
-            background-color: rgba(76, 175, 80, 0.7);
-            border: none;
-            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            background-color: #4CAF50;
             color: white;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
         }
-        .direction-btn:active {
-            background-color: rgba(69, 160, 73, 0.9);
-        }
-        #up-btn { order: 2; }
-        #left-btn { order: 1; }
-        #down-btn { order: 3; }
-        #right-btn { order: 4; }
         @media (max-width: 600px) {
             #gameCanvas {
                 width: 90vw;
@@ -91,22 +120,33 @@
     </style>
 </head>
 <body>
-    <div id="score">分数: 0</div>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
-    <div id="game-controls">
-        <button onclick="startGame()">开始游戏</button>
-        <button onclick="pauseGame()">暂停/继续</button>
-        <div class="difficulty-controls">
-            <button onclick="setGameSpeed(200)">简单</button>
-            <button onclick="setGameSpeed(150)">中等</button>
-            <button onclick="setGameSpeed(100)">困难</button>
+    <div id="difficulty-select" style="text-align: center; margin: 20px;">
+        <h2>请选择游戏难度</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+            <button onclick="selectDifficulty(200)" class="game-btn">简单</button>
+            <button onclick="selectDifficulty(150)" class="game-btn">中等</button>
+            <button onclick="selectDifficulty(100)" class="game-btn">困难</button>
         </div>
     </div>
-    <div id="direction-controls">
-        <button id="up-btn" class="direction-btn">↑</button>
-        <button id="left-btn" class="direction-btn">←</button>
-        <button id="down-btn" class="direction-btn">↓</button>
-        <button id="right-btn" class="direction-btn">→</button>
+
+    <div id="game-container" style="display: none;">
+        <div id="direction-controls">
+            <div style="width: 100%; display: flex; justify-content: center;">
+                <button id="up-btn" class="direction-btn">↑</button>
+            </div>
+            <button id="left-btn" class="direction-btn">←</button>
+            <button id="right-btn" class="direction-btn">→</button>
+            <div style="width: 100%; display: flex; justify-content: center;">
+                <button id="down-btn" class="direction-btn">↓</button>
+            </div>
+        </div>
+        
+        <div id="game-controls">
+            <button onclick="pauseGame()" class="game-btn">暂停/继续</button>
+        </div>
+
+        <div id="score">分数: 0</div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
     </div>
 
     <script src="snake.js"></script>

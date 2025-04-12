@@ -125,6 +125,13 @@ function gameOver() {
     alert(`游戏结束！最终得分：${score}`);
 }
 
+function selectDifficulty(speed) {
+    gameSpeed = speed;
+    document.getElementById('difficulty-select').style.display = 'none';
+    document.getElementById('game-container').style.display = 'block';
+    startGame();
+}
+
 function setGameSpeed(speed) {
     gameSpeed = speed;
     if (gameLoop) {
@@ -201,6 +208,6 @@ Object.entries(directionButtons).forEach(([dir, btn]) => {
 });
 
 
-// 初始化游戏
-initGame();
-draw();
+// 游戏初始显示难度选择界面，不自动开始游戏
+document.getElementById('game-container').style.display = 'none';
+document.getElementById('difficulty-select').style.display = 'block';
