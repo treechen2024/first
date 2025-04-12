@@ -120,16 +120,7 @@
     </style>
 </head>
 <body>
-    <div id="difficulty-select" style="text-align: center; margin: 20px;">
-        <h2>请选择游戏难度</h2>
-        <div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
-            <button onclick="selectDifficulty(200)" class="game-btn">简单</button>
-            <button onclick="selectDifficulty(150)" class="game-btn">中等</button>
-            <button onclick="selectDifficulty(100)" class="game-btn">困难</button>
-        </div>
-    </div>
-
-    <div id="game-container" style="display: none;">
+    <div id="game-container">
         <div id="direction-controls">
             <div style="width: 100%; display: flex; justify-content: center;">
                 <button id="up-btn" class="direction-btn">↑</button>
@@ -143,6 +134,9 @@
         
         <div id="game-controls">
             <button onclick="pauseGame()" class="game-btn">暂停/继续</button>
+            <button onclick="setGameSpeed(200)" class="game-btn">简单</button>
+            <button onclick="setGameSpeed(150)" class="game-btn">中等</button>
+            <button onclick="setGameSpeed(100)" class="game-btn">困难</button>
         </div>
 
         <div id="score">分数: 0</div>

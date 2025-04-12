@@ -125,11 +125,12 @@ function gameOver() {
     alert(`游戏结束！最终得分：${score}`);
 }
 
-function selectDifficulty(speed) {
+function setGameSpeed(speed) {
     gameSpeed = speed;
-    document.getElementById('difficulty-select').style.display = 'none';
-    document.getElementById('game-container').style.display = 'block';
-    startGame();
+    if (gameLoop) {
+        clearInterval(gameLoop);
+        gameLoop = setInterval(moveSnake, gameSpeed);
+    }
 }
 
 function setGameSpeed(speed) {
@@ -208,6 +209,5 @@ Object.entries(directionButtons).forEach(([dir, btn]) => {
 });
 
 
-// 游戏初始显示难度选择界面，不自动开始游戏
-document.getElementById('game-container').style.display = 'none';
-document.getElementById('difficulty-select').style.display = 'block';
+// 游戏自动开始
+startGame();
